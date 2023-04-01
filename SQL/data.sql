@@ -1,0 +1,3 @@
+INSERT INTO public.role(name) VALUES('SCRUM MASTER');
+INSERT INTO public.role(name) VALUES('DEVELOPER');
+INSERT INTO public.role(name) VALUES('TECH RESPONSIBLE');
