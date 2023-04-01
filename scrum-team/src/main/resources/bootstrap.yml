@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: scrum-team
+  cloud:
+    config:
+      uri: http://localhost:8071
+  profiles:
+    active: dev
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

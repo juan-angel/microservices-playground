@@ -2,3 +2,10 @@
 config-server/mvnw
 config-server/mvnw.cmd
 SQL/.project
+scrum-team/.mvn/wrapper/maven-wrapper.jar
+scrum-team/.mvn/wrapper/maven-wrapper.jar
+scrum-team/.mvn/wrapper/maven-wrapper.jar
+*.jar
+scrum-team/mvnw
+scrum-team/mvnw.cmd
+scrum-team/.mvn/wrapper/maven-wrapper.jar
