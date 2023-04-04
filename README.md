@@ -1,4 +1,4 @@
-# microservices-plyground
+# microservices-playground
 Spring Boot Microservices Playground Project
 
 ## Lanzar postgresql
