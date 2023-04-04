@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: capacity-service
+  cloud:
+    config:
+      uri: http://localhost:8071
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
