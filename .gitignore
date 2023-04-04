@@ -10,3 +10,7 @@ scrum-team/mvnw
 scrum-team/mvnw.cmd
 scrum-team/.mvn/wrapper/maven-wrapper.jar
 scrum-team/.mvn/wrapper/maven-wrapper.jar
+eureka-server/.mvn/wrapper/maven-wrapper.jar
+eureka-server/mvnw
+eureka-server/mvnw.cmd
+eureka-server/.mvn
