@@ -9,4 +9,5 @@ import lombok.Data;
 public class MemberCapacityDTO {
 	private Member member;
 	private double storyPointsCapacity;
+	private String discoveryMethod;
 }
