@@ -1,6 +1,7 @@
 package org.jangel.capacityservice.dto;
 
-import org.jangel.scrumteam.model.Member;
+
+import org.jangel.capacityservice.model.Member;
 
 import lombok.Data;
 

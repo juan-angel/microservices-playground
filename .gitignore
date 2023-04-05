@@ -15,3 +15,4 @@ eureka-server/mvnw
 eureka-server/mvnw.cmd
 eureka-server/.mvn
 capacity-service/.mvn
+.settings
