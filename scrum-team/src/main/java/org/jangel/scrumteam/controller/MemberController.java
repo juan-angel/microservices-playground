@@ -1,6 +1,7 @@
 package org.jangel.scrumteam.controller;
 
 import java.util.List;
+import java.util.concurrent.TimeoutException;
 
 import org.jangel.scrumteam.exception.MemberNotFoundException;
 import org.jangel.scrumteam.model.Member;
@@ -24,7 +25,7 @@ public class MemberController {
 	}
 	
 	@GetMapping("{memberId}")
-	public ResponseEntity<Member> getMember(@PathVariable("memberId") int memberId) throws MemberNotFoundException {
+	public ResponseEntity<Member> getMember(@PathVariable("memberId") int memberId) throws MemberNotFoundException, TimeoutException {
 		Member member = memberService.getMember(memberId);
 		
 		return ResponseEntity.ok(member);
