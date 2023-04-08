@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
-
 @Service
 public class MemberService {
 	@Autowired
@@ -24,13 +22,8 @@ public class MemberService {
 		return memberRepository.findAll();
 	}
 
-	@CircuitBreaker(name = "memberService")
 	public Member getMember(int id) throws MemberNotFoundException, TimeoutException {
 		Member member = null;
-
-		if (randomFail) {
-			randomlyFail();
-		}
 
 		member = memberRepository.findById(id).orElse(null);
 
@@ -39,11 +32,5 @@ public class MemberService {
 		}
 
 		return member;
-	}
-
-	private void randomlyFail() throws TimeoutException {
-		if (Math.random() > .00001) {
-			throw new TimeoutException();
-		}
 	}
 }

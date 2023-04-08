@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 @RestController
 @RequestMapping("/v1/member")
 public class MemberController {
@@ -25,8 +27,17 @@ public class MemberController {
 	}
 	
 	@GetMapping("{memberId}")
+	@CircuitBreaker(name = "memberService")
 	public ResponseEntity<Member> getMember(@PathVariable("memberId") int memberId) throws MemberNotFoundException, TimeoutException {
 		Member member = memberService.getMember(memberId);
+		
+		try {
+			Thread.sleep(3000);
+			throw new TimeoutException();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return ResponseEntity.ok(member);
 	}
