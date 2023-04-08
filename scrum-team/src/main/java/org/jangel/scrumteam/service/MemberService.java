@@ -15,9 +15,6 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 
-	@Value("${enable.random.fail}")
-	private boolean randomFail;
-
 	public List<Member> getMembers() {
 		return memberRepository.findAll();
 	}
