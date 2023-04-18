@@ -19,3 +19,9 @@ resilience4j.circuitbreaker:
   instances:
     memberService:
       baseConfig: default
+
+resilience4j.bulkhead:
+  instances:
+    bulkheadMemberService:
+      maxWaitDuration: 10ms   # Maximum amount of time to block a thread
+      maxConcurrentCalls: 20  # Maximum number of concurrent calls  

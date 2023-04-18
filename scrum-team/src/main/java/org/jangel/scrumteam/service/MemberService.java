@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 
 @Service
@@ -22,8 +23,9 @@ public class MemberService {
 	private boolean randomFail;
 
 	@CircuitBreaker(name = "memberService", fallbackMethod = "buildDefaultList")
+	@Bulkhead(name = "bulkheadMemberService", fallbackMethod = "buildDefaultList")
 	public List<Member> getMembers() throws TimeoutException {
-		if (randomFail && Math.random() > .0001) {
+		if (randomFail && Math.random() > .5) {
 			try {
 				Thread.sleep(3000);
 				throw new TimeoutException();
@@ -31,15 +33,15 @@ public class MemberService {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return memberRepository.findAll();
 	}
-	
+
 	@SuppressWarnings("unused")
 	private List<Member> buildDefaultList(Throwable t) {
 		Member m = new Member();
 		m.setName("Unable to connect to database");
-		
+
 		return Arrays.asList(m);
 	}
 
