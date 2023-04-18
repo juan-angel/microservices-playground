@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import io.github.resilience4j.retry.annotation.Retry;
 
 @Service
 public class MemberService {
@@ -24,6 +25,7 @@ public class MemberService {
 
 	@CircuitBreaker(name = "memberService", fallbackMethod = "buildDefaultList")
 	@Bulkhead(name = "bulkheadMemberService", fallbackMethod = "buildDefaultList")
+	@Retry(name = "retryMemberService", fallbackMethod = "buildDefaultList")
 	public List<Member> getMembers() throws TimeoutException {
 		if (randomFail && Math.random() > .5) {
 			try {
