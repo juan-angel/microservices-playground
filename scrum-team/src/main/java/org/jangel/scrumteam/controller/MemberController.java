@@ -20,7 +20,7 @@ public class MemberController {
 	private MemberService memberService;
 
 	@GetMapping
-	public ResponseEntity<List<Member>> getMembers() {
+	public ResponseEntity<List<Member>> getMembers() throws TimeoutException {
 		return ResponseEntity.ok(memberService.getMembers());
 	}
 

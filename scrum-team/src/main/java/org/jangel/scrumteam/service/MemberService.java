@@ -1,5 +1,6 @@
 package org.jangel.scrumteam.service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeoutException;
 
@@ -20,15 +21,33 @@ public class MemberService {
 	@Value("${enable.random.fail}")
 	private boolean randomFail;
 
-	public List<Member> getMembers() {
+	@CircuitBreaker(name = "memberService", fallbackMethod = "buildDefaultList")
+	public List<Member> getMembers() throws TimeoutException {
+		if (randomFail && Math.random() > .0001) {
+			try {
+				Thread.sleep(3000);
+				throw new TimeoutException();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		return memberRepository.findAll();
+	}
+	
+	@SuppressWarnings("unused")
+	private List<Member> buildDefaultList(Throwable t) {
+		Member m = new Member();
+		m.setName("Unable to connect to database");
+		
+		return Arrays.asList(m);
 	}
 
 	@CircuitBreaker(name = "memberService")
 	public Member getMember(int id) throws MemberNotFoundException, TimeoutException {
 		Member member = null;
 
-		if (randomFail && Math.random() > .0001) {
+		if (randomFail && Math.random() > .5) {
 			try {
 				Thread.sleep(3000);
 				throw new TimeoutException();
