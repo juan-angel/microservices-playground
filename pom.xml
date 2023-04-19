@@ -25,6 +25,7 @@
   <modules>
     <module>config-server</module>
     <module>eureka-server</module>
+	<module>gateway-server</module>
 	<module>scrum-team</module>
 	<module>capacity-service</module>
   </modules>
